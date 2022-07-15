@@ -1,73 +1,76 @@
 import {
   Box,
-  Text,
-  Grid,
-  GridItem,
   Button,
 } from '@chakra-ui/react';
+import {
+  Navigate,
+  Link as RouteLink,
+} from 'react-router-dom';
+import {
+  useSelector,
+} from 'react-redux';
 
 // Components
-import Card from '../../components/Card';
+import TriviaTimer from '../../components/TriviaTimer';
+import TriviaQA from '../../components/TriviaQA';
+import TriviaQASkeleton from '../../components/TriviaQASkeleton';
 
-const Trivia = () => (
-  <Box
-    display="flex"
-    flexDir="column"
-    justifyContent="center"
-    alignItems="center"
-  >
+const Trivia = () => {
+  const {
+    list,
+    isLoading,
+  } = useSelector((state) => state.trivia);
+
+  if (list.length === 0 && !isLoading) {
+    return (<Navigate to="/" replace />);
+  }
+
+  return (
     <Box
-      minW={[290, 300, 450]}
       display="flex"
       flexDir="column"
+      justifyContent="center"
+      alignItems="center"
     >
-      <Text
-        ms="auto"
-        mb="4"
-      >
-        59 Detik
-      </Text>
-      <Card
-        display="flex"
-        justifyContent="space-between"
-      >
-        <Text me="2">1.</Text>
-        <Text>
-          What is the most preferred image format used for logos in the Wikimedia database?
-        </Text>
-      </Card>
-
-      <Grid
-        templateColumns="repeat(2, 1fr)"
-        gap={[8]}
-        mt="6"
-      >
-        <GridItem as={Card}>
-          .svg
-        </GridItem>
-        <GridItem as={Card}>
-          .png
-        </GridItem>
-        <GridItem as={Card}>
-          .jpeg
-        </GridItem>
-        <GridItem as={Card}>
-          .gif
-        </GridItem>
-      </Grid>
-
       <Box
-        ms="auto"
-        mt="4"
+        minW={[290, 300, 450]}
+        display="flex"
+        flexDir="column"
       >
-        <Button
-          colorScheme="orange"
+        {!isLoading && (
+          <>
+            <TriviaTimer />
+
+            <TriviaQA />
+          </>
+        )}
+
+        {isLoading && (
+          <TriviaQASkeleton />
+        )}
+
+        <Box
+          mt="4"
+          display="flex"
+          justifyContent="space-between"
         >
-          Skip
-        </Button>
+          <Button
+            as={RouteLink}
+            to="/"
+            colorScheme="red"
+          >
+            Reset
+          </Button>
+
+          <Button
+            colorScheme="orange"
+          >
+            Skip
+          </Button>
+        </Box>
       </Box>
     </Box>
-  </Box>
-);
+  );
+};
 
 export default Trivia;

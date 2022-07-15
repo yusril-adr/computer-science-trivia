@@ -1,8 +1,7 @@
 import CONFIG from './CONFIG';
 
 const API_ENDPOINT = {
-  QUESTION: CONFIG.API_BASE_URL,
-  RESET_TOKEN: `${CONFIG.API_BASE_URL}&command=reset`,
+  TRIVIA: `${CONFIG.API_BASE_URL}?amount=10&category=18&type=multiple`,
 };
 
 export default API_ENDPOINT;

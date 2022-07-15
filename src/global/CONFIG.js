@@ -1,5 +1,8 @@
 const CONFIG = {
   API_BASE_URL: process.env.REACT_APP_API_BASE_URL,
+  TRIVIA_KEY: 'trivias',
+  TIMER_KEY: 'timer',
+  TRIVIA_TIME: 60,
   FIREBASE: {
     API_KEY: process.env.REACT_APP_FIREBASE_API_KEY,
     AUTH_DOMAIN: process.env.REACT_APP_FIREBASE_AUTH_DOMAIN,

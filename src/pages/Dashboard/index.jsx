@@ -4,16 +4,31 @@ import {
   Button,
   Divider,
 } from '@chakra-ui/react';
+import {
+  useDispatch,
+} from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 
 // Components
 import Card from '../../components/Card';
 
+// Configuration
+import CONFIG from '../../global/CONFIG';
+
+// Services
+import { startTrivia, resetTrivia } from '../../services/redux/Trivia';
+import { resetTimer } from '../../services/redux/Timer';
+
 const Dashboard = () => {
   const navigate = useNavigate();
+  const dispatch = useDispatch();
 
-  const startTrivia = () => {
+  dispatch(resetTrivia());
+  dispatch(resetTimer());
+
+  const handleStartTrivia = () => {
     navigate('/trivia');
+    dispatch(startTrivia());
   };
 
   return (
@@ -62,7 +77,7 @@ const Dashboard = () => {
             alignItems="center"
           >
             <Text fontSize="2xl">
-              60
+              {CONFIG.TRIVIA_TIME}
             </Text>
 
             <Text fontSize="2xl">
@@ -74,7 +89,7 @@ const Dashboard = () => {
         <Button
           colorScheme="teal"
           mt="6"
-          onClick={startTrivia}
+          onClick={handleStartTrivia}
         >
           Start Trivia!
         </Button>
