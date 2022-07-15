@@ -22,7 +22,6 @@ import signUpValidator from '../../validator/signUp';
 
 const SignUpForm = (props) => {
   const [formValues, setFormValues] = useState({
-    name: '',
     email: '',
     password: '',
   });
@@ -80,20 +79,6 @@ const SignUpForm = (props) => {
   return (
     <Card as="form" onSubmit={handleSignUp} {...props}>
       <Heading textAlign="center" size={['md', 'lg']}>Sign Up</Heading>
-
-      <FormControl mt="4" isInvalid={validateError?.name}>
-        <FormLabel htmlFor="name">Name</FormLabel>
-        <Input
-          onChange={handleInputChange}
-          value={formValues.name}
-          id="name"
-          name="name"
-          type="text"
-          autoComplete="off"
-          required
-        />
-        {validateError?.name && <FormErrorMessage>{validateError?.name}</FormErrorMessage>}
-      </FormControl>
 
       <FormControl mt="4" isInvalid={validateError?.email}>
         <FormLabel htmlFor="email">Email</FormLabel>

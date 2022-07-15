@@ -2,10 +2,6 @@ import Regex from '../utils/Regex';
 
 export default (values) => {
   const errors = {};
-  if (!values.name?.trim()) {
-    errors.name = 'Username is required.';
-  }
-
   if (!values.email?.trim()) {
     errors.email = 'Email is required.';
   }

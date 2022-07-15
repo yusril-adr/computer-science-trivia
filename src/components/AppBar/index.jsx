@@ -67,10 +67,10 @@ const AppBar = ({ ...props }) => {
 
         {user && (
           <Box
-            display={{ base: 'none', md: 'flex' }}
+            display={{ base: 'none', lg: 'flex' }}
             alignItems="center"
           >
-            <Avatar name={user?.displayName} src={`https://ui-avatars.com/api/?background=random&name=${user?.displayName}`} />
+            <Avatar name={user?.email} src={`https://ui-avatars.com/api/?background=random&name=${user?.email}`} />
             <Menu>
               <MenuButton
                 as={Button}
@@ -78,7 +78,7 @@ const AppBar = ({ ...props }) => {
                 ms={[1, 2]}
                 variant="ghost"
               >
-                {user?.displayName}
+                {user?.email}
               </MenuButton>
               <MenuList>
                 <MenuItem as={RouteLink} to="/logout">Log Out</MenuItem>
@@ -90,7 +90,7 @@ const AppBar = ({ ...props }) => {
         )}
 
         <IconButton
-          display={{ base: 'flex', md: 'none' }}
+          display={{ base: 'flex', lg: 'none' }}
           size="md"
           fontSize="lg"
           aria-label="Toggle Drawer"
