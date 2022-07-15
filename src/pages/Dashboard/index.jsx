@@ -62,7 +62,7 @@ const Dashboard = () => {
             </Text>
 
             <Text fontSize="2xl">
-              Soal
+              Question
             </Text>
           </Box>
 
@@ -81,7 +81,7 @@ const Dashboard = () => {
             </Text>
 
             <Text fontSize="2xl">
-              Detik
+              Seconds
             </Text>
           </Box>
         </Box>

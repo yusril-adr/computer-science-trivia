@@ -7,21 +7,27 @@ import CONFIG from '../../../global/CONFIG';
 import Timer from '../../localStorage/Timer';
 
 const initialState = {
-  value: CONFIG.TRIVIA_TIME,
+  value: Timer.getTimer() || CONFIG.TRIVIA_TIME,
 };
 
 export const timerSlicer = createSlice({
   name: 'timer',
-  initialState: Timer.getTimer() || initialState,
+  initialState,
   reducers: {
     resetTimer: () => {
-      Timer.cleatTimer();
+      Timer.clearTimer();
 
       return initialState;
     },
     setTimer: (state, { payload: currentTime }) => {
-      Timer.saveTimer(currentTime);
+      if (currentTime <= 0) {
+        Timer.saveTimer(0);
+        return {
+          value: 0,
+        };
+      }
 
+      Timer.saveTimer(currentTime);
       return {
         value: currentTime,
       };

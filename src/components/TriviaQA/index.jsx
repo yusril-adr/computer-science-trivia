@@ -1,22 +1,28 @@
 import {
-  // useDispatch,
+  useDispatch,
   useSelector,
 } from 'react-redux';
 import {
+  useColorModeValue,
   Text,
   Grid,
   GridItem,
+  Button,
 } from '@chakra-ui/react';
 
 // Components
 import Card from '../Card';
+
+// Services
+import { updateTriviaAnswer } from '../../services/redux/Trivia';
 
 const Trivia = () => {
   const {
     list,
     currentNumber,
   } = useSelector((state) => state.trivia);
-  // const dispatch = useDispatch();
+  const dispatch = useDispatch();
+  const bgColor = useColorModeValue('white', 'gray.700');
 
   const currentTrivia = list[currentNumber - 1];
   const answers = [
@@ -24,17 +30,29 @@ const Trivia = () => {
     currentTrivia.correct_answer,
   ].sort(() => Math.random() - 0.5);
 
-  const convertstring = (string) => string.replace(/&#(?:x([\da-f]+)|(\d+));/ig, (_, hex, dec) => String.fromCharCode(dec || +(`0x${hex}`)));
+  const htmlDecode = (input) => {
+    const doc = new DOMParser().parseFromString(input, 'text/html');
+    return doc.documentElement.textContent;
+  };
+
+  const handleAnswer = (answer) => {
+    const newList = [...list];
+    newList[currentNumber - 1] = {
+      ...currentTrivia,
+      answered: answer,
+    };
+
+    dispatch(updateTriviaAnswer(newList));
+  };
 
   return (
     <>
       <Card
         display="flex"
-        justifyContent="space-between"
       >
         <Text me="2">{currentNumber}.</Text>
         <Text>
-          {convertstring(currentTrivia.question)}
+          {htmlDecode(currentTrivia.question)}
         </Text>
       </Card>
 
@@ -44,8 +62,15 @@ const Trivia = () => {
         mt="6"
       >
         {answers.map((answer) => (
-          <GridItem as={Card} key={answer}>
-            {convertstring(answer)}
+          <GridItem
+            key={answer}
+            as={Button}
+            px={[4, 6]}
+            py={[6, 9]}
+            bgColor={bgColor}
+            onClick={() => handleAnswer(answer)}
+          >
+            {htmlDecode(answer)}
           </GridItem>
         ))}
       </Grid>

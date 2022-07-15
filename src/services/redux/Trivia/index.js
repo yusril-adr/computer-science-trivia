@@ -21,6 +21,17 @@ export const triviaSlicer = createSlice({
 
       return initialState;
     },
+    updateTriviaAnswer: (state, { payload: updatedList }) => {
+      const newTriviaState = {
+        ...state,
+        currentNumber: state.currentNumber + 1,
+        list: updatedList,
+      };
+
+      Trivia.saveTrivias(newTriviaState);
+
+      return newTriviaState;
+    },
   },
   extraReducers: {
     [startTrivia.pending]: (state) => ({ ...state, isLoading: true }),
@@ -46,10 +57,12 @@ export const triviaSlicer = createSlice({
 
 const {
   resetTrivia,
+  updateTriviaAnswer,
 } = triviaSlicer.actions;
 
 export {
   resetTrivia,
+  updateTriviaAnswer,
   startTrivia,
 };
 

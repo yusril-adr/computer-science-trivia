@@ -17,11 +17,14 @@ const TriviaTimer = () => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    const timer = setInterval(() => {
-      dispatch(setTimer(time - 1));
-    }, 1000);
-    return () => clearInterval(timer);
-  });
+    if (time) {
+      const timer = setInterval(() => {
+        dispatch(setTimer(time - 1));
+      }, 1000);
+
+      return () => clearInterval(timer);
+    }
+  }, [time]);
 
   return (
     <Text
