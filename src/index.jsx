@@ -1,6 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import { BrowserRouter } from 'react-router-dom';
+import { Provider } from 'react-redux';
 import {
   ChakraProvider,
   ColorModeScript,
@@ -16,6 +17,9 @@ import './index.css';
 // Components
 import App from './App';
 
+// Redux Store
+import store from './services/redux/store';
+
 // Utils
 import theme from './theme';
 import reportWebVitals from './reportWebVitals';
@@ -23,10 +27,12 @@ import reportWebVitals from './reportWebVitals';
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <BrowserRouter>
-    <ChakraProvider theme={theme}>
-      <ColorModeScript />
-      <App />
-    </ChakraProvider>
+    <Provider store={store}>
+      <ChakraProvider theme={theme}>
+        <ColorModeScript />
+        <App />
+      </ChakraProvider>
+    </Provider>
   </BrowserRouter>,
 );
 

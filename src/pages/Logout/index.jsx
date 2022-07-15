@@ -1,10 +1,19 @@
+import { useEffect } from 'react';
 import {
   Navigate,
 } from 'react-router-dom';
 
+// Services
+import Auth from '../../services/firebase/authentication';
+
 const SignOut = () => {
-  // eslint-disable-next-line no-unused-vars
-  const user = false;
+  useEffect(() => {
+    const logout = async () => {
+      await Auth.signOut();
+    };
+
+    logout();
+  }, []);
 
   return (<Navigate to="/login" replace />);
 };

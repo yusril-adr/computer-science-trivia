@@ -1,5 +1,17 @@
 const CONFIG = {
-  API_BASE_URL: 'https://opentdb.com/api.php?amount=10&category=18',
+  API_BASE_URL: process.env.REACT_APP_API_BASE_URL,
+  FIREBASE: {
+    API_KEY: process.env.REACT_APP_FIREBASE_API_KEY,
+    AUTH_DOMAIN: process.env.REACT_APP_FIREBASE_AUTH_DOMAIN,
+    PROJECT_ID: process.env.REACT_APP_FIREBASE_PROJECT_ID,
+    STORAGE_BUCKET: process.env.REACT_APP_FIREBASE_STORAGE_BUCKET,
+    MESSAGING_SENDER_ID: process.env.REACT_APP_FIREBASE_MESSAGING_SENDER_ID,
+    APP_ID: process.env.REACT_APP_FIREBASE_APP_ID,
+    STORAGE: {
+      PRODUCT: process.env.REACT_APP_FIREBASE_STORAGE_PRODUCT,
+    },
+    USER_TOKEN_KEY: process.env.REACT_APP_FIREBASE_USER_TOKEN_KEY,
+  },
 };
 
 export default CONFIG;

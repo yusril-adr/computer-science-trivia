@@ -1,13 +1,18 @@
+import { useEffect } from 'react';
 import {
   Routes,
   Route,
   Navigate,
 } from 'react-router-dom';
+import {
+  useSelector,
+  useDispatch,
+} from 'react-redux';
 
 // Routes
 import ProtectedRoutes from './routes/ProtectedRoutes';
 
-// Layouta
+// Layouts
 import Layout from './layouts';
 
 // Pages
@@ -18,8 +23,36 @@ import Logout from './pages/Logout';
 import Trivia from './pages/Trivia';
 import Result from './pages/Result';
 
+// Services
+import { auth } from './services/firebase/config';
+import Auth from './services/firebase/authentication';
+import Token from './services/localStorage/Token';
+import { updateUser } from './services/redux/User';
+
 const App = () => {
-  const user = true;
+  const user = useSelector((state) => state.user.value);
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    const initUser = async () => {
+      const token = Token.getToken();
+
+      if (token) {
+        await Auth.signInToken(token);
+      }
+    };
+
+    auth.onAuthStateChanged((changedUser) => {
+      if (changedUser) {
+        dispatch(updateUser(changedUser.toJSON()));
+      } else {
+        dispatch(updateUser(null));
+        Token.removeToken();
+      }
+    });
+
+    initUser();
+  }, []);
 
   return (
     <Routes>

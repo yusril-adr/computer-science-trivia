@@ -29,14 +29,20 @@ import {
   ChevronDownIcon,
   HamburgerIcon,
 } from '@chakra-ui/icons';
+import {
+  useSelector,
+} from 'react-redux';
 
 // Components
 import ColorModeSwitcher from '../ColorModeSwitcher';
+
+// Services
 
 const AppBar = ({ ...props }) => {
   const bgColor = useColorModeValue('white', 'gray.800');
   const { isOpen, onOpen, onClose } = useDisclosure();
   const drawerBtnRef = useRef();
+  const user = useSelector((state) => state.user.value);
 
   return (
     <Box
@@ -59,27 +65,29 @@ const AppBar = ({ ...props }) => {
           Computer Science Trivia
         </Heading>
 
-        <Box
-          display={{ base: 'none', md: 'flex' }}
-          alignItems="center"
-        >
-          <Avatar name="Dummy User" src="https://ui-avatars.com/api/?background=random&name=Dummy User" />
-          <Menu>
-            <MenuButton
-              as={Button}
-              rightIcon={<ChevronDownIcon />}
-              ms={[1, 2]}
-              variant="ghost"
-            >
-              Dummy User
-            </MenuButton>
-            <MenuList>
-              <MenuItem as={RouteLink} to="/logout">Log Out</MenuItem>
-            </MenuList>
-          </Menu>
+        {user && (
+          <Box
+            display={{ base: 'none', md: 'flex' }}
+            alignItems="center"
+          >
+            <Avatar name={user?.displayName} src={`https://ui-avatars.com/api/?background=random&name=${user?.displayName}`} />
+            <Menu>
+              <MenuButton
+                as={Button}
+                rightIcon={<ChevronDownIcon />}
+                ms={[1, 2]}
+                variant="ghost"
+              >
+                {user?.displayName}
+              </MenuButton>
+              <MenuList>
+                <MenuItem as={RouteLink} to="/logout">Log Out</MenuItem>
+              </MenuList>
+            </Menu>
 
-          <ColorModeSwitcher ms="2" />
-        </Box>
+            <ColorModeSwitcher ms="2" />
+          </Box>
+        )}
 
         <IconButton
           display={{ base: 'flex', md: 'none' }}
@@ -112,11 +120,13 @@ const AppBar = ({ ...props }) => {
               <ColorModeSwitcher me={6} />
             </DrawerHeader>
             <DrawerBody>
-              <List spacing={3}>
-                <ListItem>
-                  <Button variant="ghost" as={RouteLink} to="/logout">Log Out</Button>
-                </ListItem>
-              </List>
+              {user && (
+                <List spacing={3}>
+                  <ListItem>
+                    <Button variant="ghost" as={RouteLink} to="/logout">Log Out</Button>
+                  </ListItem>
+                </List>
+              )}
             </DrawerBody>
           </DrawerContent>
         </Drawer>
