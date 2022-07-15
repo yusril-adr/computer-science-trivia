@@ -81,7 +81,7 @@ const SignUpForm = (props) => {
       <Heading textAlign="center" size={['md', 'lg']}>Sign Up</Heading>
 
       <FormControl mt="4" isInvalid={validateError?.email}>
-        <FormLabel htmlFor="email">Email</FormLabel>
+        <FormLabel htmlFor="email">Email address</FormLabel>
         <Input
           onChange={handleInputChange}
           value={formValues.email}
