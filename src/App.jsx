@@ -1,25 +1,58 @@
 import {
-  Container,
-} from '@chakra-ui/react';
-import { SkipNavLink, SkipNavContent } from '@chakra-ui/skip-nav';
+  Routes,
+  Route,
+  Navigate,
+} from 'react-router-dom';
 
-// Global Components
-import AppBar from './components/AppBar';
-import Footer from './components/Footer';
+// Routes
+import ProtectedRoutes from './routes/ProtectedRoutes';
+
+// Layouta
+import Layout from './layouts';
+
+// Pages
+import Dashboard from './pages/Dashboard';
+import Login from './pages/Login';
+import SignUp from './pages/SignUp';
+import Logout from './pages/Logout';
+import Trivia from './pages/Trivia';
 import Result from './pages/Result';
 
-const App = () => (
-  <>
-    <SkipNavLink zIndex="9999">Skip to content</SkipNavLink>
-    <AppBar maxW="5xl" />
+const App = () => {
+  const user = true;
 
-    <Container as="main" maxW="5xl" mt="32" minH="calc(80vh - 164px)">
-      <SkipNavContent />
-      <Result />
-    </Container>
+  return (
+    <Routes>
+      <Route path="/" element={<Layout />}>
+        <Route index element={user ? <Dashboard /> : <Navigate to="/login" />} />
 
-    <Footer my="16" />
-  </>
-);
+        <Route
+          element={
+            <ProtectedRoutes redirectPath="/login" allowedBy={user} />
+          }
+        >
+          <Route path="logout" element={<Logout />} />
+          <Route
+            path="trivia"
+            element={<Trivia />}
+          />
+          <Route
+            path="result"
+            element={<Result />}
+          />
+        </Route>
+
+        <Route
+          element={<ProtectedRoutes redirectPath="/" allowedBy={!user} />}
+        >
+          <Route path="login" element={<Login />} />
+          <Route path="sign-up" element={<SignUp />} />
+        </Route>
+
+        <Route path="*" element={<Navigate to="/" replace />} />
+      </Route>
+    </Routes>
+  );
+};
 
 export default App;

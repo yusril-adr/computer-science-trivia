@@ -1,5 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
+import { BrowserRouter } from 'react-router-dom';
 import {
   ChakraProvider,
   ColorModeScript,
@@ -21,10 +22,12 @@ import reportWebVitals from './reportWebVitals';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
-  <ChakraProvider theme={theme}>
-    <ColorModeScript />
-    <App />
-  </ChakraProvider>,
+  <BrowserRouter>
+    <ChakraProvider theme={theme}>
+      <ColorModeScript />
+      <App />
+    </ChakraProvider>
+  </BrowserRouter>,
 );
 
 // If you want to start measuring performance in your app, pass a function

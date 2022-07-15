@@ -3,6 +3,9 @@ import {
   Text,
   Link,
 } from '@chakra-ui/react';
+import {
+  Link as RouteLink,
+} from 'react-router-dom';
 
 // Components
 import Card from '../../components/Card';
@@ -32,7 +35,7 @@ const SignUp = () => (
         Have an account?
       </Text>
 
-      <Link href="#" color="teal">
+      <Link as={RouteLink} color="teal" to="/login">
         Log in
       </Link>
     </Card>

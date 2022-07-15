@@ -1,5 +1,8 @@
 import { useRef } from 'react';
 import {
+  Link as RouteLink,
+} from 'react-router-dom';
+import {
   useColorModeValue,
   useDisclosure,
   Container,
@@ -71,7 +74,7 @@ const AppBar = ({ ...props }) => {
               Dummy User
             </MenuButton>
             <MenuList>
-              <MenuItem>Log Out</MenuItem>
+              <MenuItem as={RouteLink} to="/logout">Log Out</MenuItem>
             </MenuList>
           </Menu>
 
@@ -111,7 +114,7 @@ const AppBar = ({ ...props }) => {
             <DrawerBody>
               <List spacing={3}>
                 <ListItem>
-                  <Button variant="ghost">Log Out</Button>
+                  <Button variant="ghost" as={RouteLink} to="/logout">Log Out</Button>
                 </ListItem>
               </List>
             </DrawerBody>
