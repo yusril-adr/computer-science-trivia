@@ -1,6 +1,5 @@
 import {
   createUserWithEmailAndPassword,
-  updateProfile,
   signInWithEmailAndPassword,
   signInWithCredential,
   signOut,
@@ -8,14 +7,8 @@ import {
 import { auth } from './config';
 
 const Auth = {
-  async signUp({ name, email, password }) {
-    await createUserWithEmailAndPassword(auth, email, password);
-    const userCredential = await signInWithEmailAndPassword(auth, email, password);
-
-    await updateProfile(auth.currentUser, {
-      displayName: name,
-    });
-
+  async signUp({ email, password }) {
+    const userCredential = await createUserWithEmailAndPassword(auth, email, password);
     return userCredential;
   },
 
