@@ -65,29 +65,31 @@ const AppBar = ({ ...props }) => {
           Computer Science Trivia
         </Heading>
 
-        {user && (
-          <Box
-            display={{ base: 'none', lg: 'flex' }}
-            alignItems="center"
-          >
-            <Avatar name={user?.email} src={`https://ui-avatars.com/api/?background=random&name=${user?.email}`} />
-            <Menu>
-              <MenuButton
-                as={Button}
-                rightIcon={<ChevronDownIcon />}
-                ms={[1, 2]}
-                variant="ghost"
-              >
-                {user?.email}
-              </MenuButton>
-              <MenuList>
-                <MenuItem as={RouteLink} to="/logout">Log Out</MenuItem>
-              </MenuList>
-            </Menu>
+        <Box
+          display={{ base: 'none', lg: 'flex' }}
+          alignItems="center"
+        >
+          {user && (
+            <>
+              <Avatar name={user?.email} src={`https://ui-avatars.com/api/?background=random&name=${user?.email}`} />
+              <Menu>
+                <MenuButton
+                  as={Button}
+                  rightIcon={<ChevronDownIcon />}
+                  ms={[1, 2]}
+                  variant="ghost"
+                >
+                  {user?.email}
+                </MenuButton>
+                <MenuList>
+                  <MenuItem as={RouteLink} to="/logout">Log Out</MenuItem>
+                </MenuList>
+              </Menu>
+            </>
+          )}
 
-            <ColorModeSwitcher ms="2" />
-          </Box>
-        )}
+          <ColorModeSwitcher ms="2" />
+        </Box>
 
         <IconButton
           display={{ base: 'flex', lg: 'none' }}
