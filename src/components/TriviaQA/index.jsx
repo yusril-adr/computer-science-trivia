@@ -68,6 +68,8 @@ const Trivia = () => {
             px={[4, 6]}
             py={[6, 9]}
             bgColor={bgColor}
+            borderRadius="md"
+            boxShadow="lg"
             onClick={() => handleAnswer(answer)}
           >
             {htmlDecode(answer)}

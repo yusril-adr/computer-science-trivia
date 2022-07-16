@@ -1,3 +1,4 @@
+import { useEffect } from 'react';
 import {
   Box,
   Text,
@@ -23,11 +24,15 @@ const Dashboard = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
-  dispatch(resetTrivia());
-  dispatch(resetTimer());
+  useEffect(() => {
+    dispatch(resetTrivia());
+    dispatch(resetTimer());
+  }, []);
 
   const handleStartTrivia = () => {
     navigate('/trivia');
+    dispatch(resetTrivia());
+    dispatch(resetTimer());
     dispatch(startTrivia());
   };
 
