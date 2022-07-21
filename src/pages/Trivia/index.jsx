@@ -26,6 +26,7 @@ const Trivia = () => {
     isLoading,
     currentNumber,
   } = useSelector((state) => state.trivia);
+
   const dispatch = useDispatch();
 
   const handleAnswer = () => {

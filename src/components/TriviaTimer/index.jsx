@@ -5,6 +5,7 @@ import {
   useDispatch,
   useSelector,
 } from 'react-redux';
+import { Navigate } from 'react-router-dom';
 import {
   Text,
 } from '@chakra-ui/react';
@@ -25,6 +26,10 @@ const TriviaTimer = () => {
       return () => clearInterval(timer);
     }
   }, [time]);
+
+  if (time <= 0) {
+    return <Navigate to="/result" />;
+  }
 
   return (
     <Text
