@@ -5,7 +5,7 @@ Test your computer science knowlodge, and achieve the perfect score now.
 - [Indonesia](./README_id.md)
 
 ## Website
-https://yusril-adr.github.io/computer-science-trivia
+https://computer-science-trivias.netlify.app/
 
 ## How to Run App
 - Be sure your computer is already installed node.js and npm.
