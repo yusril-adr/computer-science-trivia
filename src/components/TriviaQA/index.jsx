@@ -57,8 +57,8 @@ const Trivia = () => {
       </Card>
 
       <Grid
-        templateColumns="repeat(2, 1fr)"
-        gap={[8]}
+        templateColumns={['repeat(1, 1fr)', 'repeat(2, 1fr)']}
+        gap={[4, 8]}
         mt="6"
       >
         {answers.map((answer) => (
@@ -70,6 +70,8 @@ const Trivia = () => {
             bgColor={bgColor}
             borderRadius="md"
             boxShadow="lg"
+            whiteSpace="normal"
+            minHeight={100}
             onClick={() => handleAnswer(answer)}
           >
             {htmlDecode(answer)}
