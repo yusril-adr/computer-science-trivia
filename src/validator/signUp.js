@@ -12,7 +12,7 @@ export default (values) => {
   if (!values.password?.trim()) {
     errors.password = 'Password is required.';
   }
-  if (values.password?.trim().length > 8) {
+  if (values.password?.trim().length < 8) {
     errors.password = 'Password must at least 8 character.';
   }
 
